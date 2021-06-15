@@ -38,8 +38,11 @@ const getBoard = (req, res, next) => {
           }
         })
        .then(board => {
-        res.json(board)
-      })
+          res.json(board)
+        })
+       .catch(err =>
+         next(new HttpError("Board doesn't exist", 404))
+        );
 }
 
 exports.getBoards = getBoards;
