@@ -1,4 +1,6 @@
 const Board = require("../models/board");
+const List = require("../models/list");
+const Card = require("../models/card");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
@@ -10,6 +12,12 @@ const getBoards = (req, res, next) => {
       })
     })
 };
+
+const getBoard = (req, res, next) => {
+  Board.findById(req.params.id).populate({path: 'lists', populate: {path: 'cards'}}).exec((err, board) => {
+    res.json({board})
+  })
+}
 
 const createBoard = (req, res, next) => {
   const errors = validationResult(req);
@@ -28,3 +36,4 @@ const createBoard = (req, res, next) => {
 
 exports.getBoards = getBoards;
 exports.createBoard = createBoard;
+exports.getBoard = getBoard;
