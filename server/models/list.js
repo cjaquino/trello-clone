@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Card = require('./card')
 const Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
@@ -15,11 +14,10 @@ const ListSchema = new Schema({
       type: Number,
       required: [true, "The List position is required"]
     },
-    cards: [
-      {
-        type: Card
-      }
-    ]
+    cards: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Card"
+    }]
   },
   { timestamps: true }
 )

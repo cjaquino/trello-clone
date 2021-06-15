@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const List = require('./list')
 const Schema = mongoose.Schema;
 
 const BoardSchema = new Schema({
@@ -7,11 +6,10 @@ const BoardSchema = new Schema({
       type: String,
       required: [true, 'The Board title is required']
     },
-    lists: [
-      {
-        type: List
-      }
-    ]
+    lists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "List"
+      }]
   },
   { timestamps: true }
 )
