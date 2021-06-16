@@ -13,7 +13,7 @@ import DueDatePopover from "./ui/DueDatePopover";
 import LabelsPopover from "./ui/LabelsPopover";
 import MoveCardPopover from "./ui/MoveCardPopover";
 import SingleBoard from "./ui/SingleBoard";
-import Board from "./ui/Board";
+import Board from "./ui/boardView/Board";
 
 const Application = () => {
   return (
