@@ -7,11 +7,11 @@ import { useParams } from "react-router-dom";
 
 const BoardContainer = () => {
   const dispatch = useDispatch();
-  const board = useSelector((state) => state.board); // TODO: filter for board
+  const board = useSelector((state) => state.board);
   let { id } = useParams();
 
   useEffect(() => {
-  dispatch(getBoard(id)); // TODO: remove or change
+  dispatch(getBoard(id));
   }, [dispatch, id])
   return (
     <>

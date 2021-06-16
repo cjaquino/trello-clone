@@ -1,6 +1,6 @@
 export default function cards(state = [], action) {
   switch (action.type) {
-    case "FETCH_BOARDS_SUCCESS": {
+    case "FETCH_BOARD_SUCCESS": {
       // TODO
       return state.concat;
     }
