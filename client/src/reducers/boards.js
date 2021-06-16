@@ -1,5 +1,8 @@
 export default function boards(state = [], action) {
   switch (action.type) {
+    case "FETCH_BOARD_SUCCESS": {
+      return action.board;
+    }
     case "FETCH_BOARDS_SUCCESS": {
       return action.boards;
     }
