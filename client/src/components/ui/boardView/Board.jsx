@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
 import List from "./List";
+import { useParams } from "react-router-dom";
+import { fetchBoard } from "../../../actions/BoardActions";
 
 const Board = () => {
+  const dispatch = useDispatch();
+  let { id } = useParams();
+
+  const board = useSelector((state) => state.boards);
+
+  useEffect(() => {
+    dispatch(fetchBoard(id));
+  }, [dispatch, id]);
+
+  console.log(board);
   // TODO: Break down into components
   return (
     <>
@@ -10,9 +23,10 @@ const Board = () => {
       <main>
         <div id="list-container" className="list-container">
           <div id="existing-lists" className="existing-lists">
-            <List title="List 1" />
-            <List title="List 2" />
-            <List title="List 3" />
+            {board.lists
+              ? board.lists.map((l) => <List key={l._id} id={l._id} />)
+              : ""
+            }
           </div>
           <div id="new-list" className="new-list">
             <span>Add a list...</span>
