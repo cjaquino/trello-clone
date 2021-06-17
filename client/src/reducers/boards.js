@@ -1,5 +1,12 @@
 export default function boards(state = [], action) {
   switch (action.type) {
+    case "FETCH_BOARD_SUCCESS": {
+      if (state.length === 0) {
+        return state.concat(action.payload.board);
+      }
+
+      return state;
+    }
     case "FETCH_BOARDS_SUCCESS": {
       return action.boards;
     }
