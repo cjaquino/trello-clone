@@ -1,48 +1,32 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CardContainer from "./CardContainer"
+import CardContainer from "./CardContainer";
+import AddDropdown from "./AddDropdown";
 
 const List = ({
   title,
   id
 }) => {
-  const cards = useSelector((state) => state.cards.filter(c => c.listId === id));
-  console.log(cards);
+  const allCards = useSelector((state) => state.cards);
+  const cards = allCards.filter(c => c.listId === id);
+
   return (
-  <div className="list-wrapper">
-              <div className="list-background">
-                <div className="list">
-                  <a className="more-icon sm-icon" href=""></a>
-                  <div>
-                    <p className="list-title">{title}</p>
-                  </div>
-                  <div className="add-dropdown add-top">
-                    <div className="card"></div>
-                    <a className="button">Add</a>
-                    <i className="x-icon icon"></i>
-                    <div className="add-options">
-                      <span>...</span>
-                    </div>
-                  </div>
-                  <CardContainer />
-                  <div className="add-dropdown add-bottom">
-                    <div className="card">
-                      <div className="card-info"></div>
-                      <textarea name="add-card"></textarea>
-                      <div className="members"></div>
-                    </div>
-                    <a className="button">Add</a>
-                    <i className="x-icon icon"></i>
-                    <div className="add-options">
-                      <span>...</span>
-                    </div>
-                  </div>
-                  <div className="add-card-toggle" data-position="bottom">
-                    Add a card...
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div className="list-wrapper">
+      <div className="list-background">
+        <div className="list">
+          <a className="more-icon sm-icon" href=""></a>
+          <div>
+            <p className="list-title">{title}</p>
+          </div>
+          <AddDropdown pos="top" />
+          {cards.map(c => <CardContainer key={c._id} cardId={c._id} />)}
+          <AddDropdown pos="bottom" />
+          <div className="add-card-toggle" data-position="bottom">
+            Add a card...
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

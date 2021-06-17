@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-const Header = () => {
+const Header = ({ title }) => {
   return (
     <header>
       <ul>
-        <li id="title">My Title</li>
+        <li id="title">{title}</li>
         <li className="star-icon icon"></li>
         <li className="private private-icon icon">Private</li>
       </ul>

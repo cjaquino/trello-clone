@@ -1,11 +1,11 @@
 import React from "react";
 import Card from "./Card"
 
-const CardContainer = () => {
+const CardContainer = ({ cardId }) => {
   return (
     <div id="cards-container" data-id="list-1-cards">
-      <Card />
-    </div>        
+      <Card id={cardId} />
+    </div>
   )
 }
 

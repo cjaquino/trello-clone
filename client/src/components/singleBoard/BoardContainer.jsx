@@ -1,7 +1,7 @@
 import Header from "./Header"
 import ListContainer from "./ListContainer"
 import React, {useEffect} from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getBoard } from '../../actions/BoardActions';
 import { useParams } from "react-router-dom";
 
@@ -11,12 +11,19 @@ const BoardContainer = () => {
   let { id } = useParams();
 
   useEffect(() => {
-  dispatch(getBoard(id));
+    dispatch(getBoard(id));
   }, [dispatch, id])
+
+  const boards = useSelector(state => state.boards);
+  let boardTitle = "Loading...";
+
+  if (boards.length > 0) {
+    boardTitle = boards[0].title;
+  }
 
   return (
     <>
-      <Header />
+      <Header title={boardTitle} />
       <ListContainer />
     </>
   )   
