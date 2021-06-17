@@ -10,7 +10,7 @@ const Card = ({ card }) => {
           {card.labels.map(label => {
             return <CardLabel key={`${label}-${card._id}`} label={label} />
           })}
-          <p>{card.description}</p>
+          <p>{card.title}</p>
         </div>
         <div className="card-icons">
           <i className="clock-icon sm-icon overdue-recent completed">
