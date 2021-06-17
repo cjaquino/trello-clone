@@ -8,12 +8,13 @@ const ListSchema = new Schema(
       required: [true, "The List title is required"],
     },
     boardId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: [true, "The List boardId is required"],
+      ref: "Board",
     },
     position: {
       type: Number,
-      required: [true, "The List position is required"],
+      default: 65535,
     },
     cards: [
       {
