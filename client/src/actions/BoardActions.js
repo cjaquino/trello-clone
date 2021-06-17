@@ -18,7 +18,7 @@ export function createBoardSuccess(board) {
 }
 
 export function fetchBoardSuccess(board) {
-  return { type: types.FETCH_BOARD_SUCCESS, board}
+  return { type: types.FETCH_BOARD_SUCCESS, payload: board };
 }
 
 export function fetchBoards() {
