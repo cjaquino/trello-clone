@@ -1,11 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import AddDropdown from "./AddDropdown";
-import Card from "./Card";
+import CardsContainer from "./CardsContainer";
 
 const List = ({ id }) => {
   const list = useSelector((state) => state.boards.lists.find((l) => l._id === id));
-  console.log(list);
   return (
     <div className="list-wrapper">
       <div className="list-background">
@@ -15,9 +14,7 @@ const List = ({ id }) => {
             <p className="list-title">{list.title}</p>
           </div>
           <AddDropdown pos="top" />
-          <div id="cards-container" data-id="list-1-cards">
-            {list.cards.map((c) => <Card key={c._id} />)}
-          </div>
+          <CardsContainer listId={id} />
           <AddDropdown pos="bottom" />
           <div className="add-card-toggle" data-position="bottom">
             Add a card...
