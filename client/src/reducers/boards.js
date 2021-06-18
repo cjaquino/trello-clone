@@ -10,6 +10,11 @@ export default function boards(state = [], action) {
       const newBoard = action.board;
       return state.concat(newBoard);
     }
+    case "CREATE_LIST_SUCCESS": {
+      let clonedState = Object.assign({}, state);
+      clonedState.lists.push(action.list);
+      return clonedState;
+    }
     default:
       return state;
   }
