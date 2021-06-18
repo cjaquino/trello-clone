@@ -34,7 +34,7 @@ const updateListTitle = (req, res, next) => {
       });
     })
     .catch((err) =>
-      next(new HttpError("Creating list failed, please try again", 500))
+      next(new HttpError("Update list failed, please try again", 500))
     );
 };
 
