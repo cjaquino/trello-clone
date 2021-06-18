@@ -46,6 +46,13 @@ const getBoard = (req, res, next) => {
     .catch((err) => next(new HttpError("Board doesn't exist", 404)));
 };
 
+const addListToBoard = (req, res, next) => {
+  Board.findByIdAndUpdate(req.body.boardId, { $addToSet: {
+    lists: req.list._id
+  }}).then(() => next())
+}
+
 exports.getBoards = getBoards;
 exports.getBoard = getBoard;
 exports.createBoard = createBoard;
+exports.addListToBoard = addListToBoard;
