@@ -23,7 +23,7 @@ const createList = (req, res, next) => {
   }
 };
 
-const updateListTitle = (req, res, next) => {
+const updateList = (req, res, next) => {
   List.findById(req.params.id)
     .then((list) => {
       list.title = req.body.title || list.title;
@@ -44,4 +44,4 @@ const sendList = (req, res, next) => {
 
 exports.createList = createList;
 exports.sendList = sendList;
-exports.updateListTitle = updateListTitle;
+exports.updateList = updateList;

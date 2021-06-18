@@ -17,10 +17,6 @@ router.post(
   listsController.sendList
 );
 
-router.put(
-  "/lists/:id",
-  listsController.updateListTitle,
-  listsController.sendList
-);
+router.put("/lists/:id", listsController.updateList, listsController.sendList);
 
 module.exports = router;
