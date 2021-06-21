@@ -12,7 +12,6 @@ const Board = () => {
   let { id } = useParams();
 
   const board = useSelector((state) => state.boards);
-  const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
     dispatch(fetchBoard(id));
@@ -25,7 +24,7 @@ const Board = () => {
         <ListContainer />
       </main>
       <MenuSidebar />
-      <Modal visible={modal.visible} />
+      <Modal />
       <div id="dropdown-container"></div>
     </>
   );

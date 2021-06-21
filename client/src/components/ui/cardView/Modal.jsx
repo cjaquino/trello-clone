@@ -1,14 +1,23 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { hideModal } from "../../../actions/ModalActions";
 
-const Modal = ({ visible }) => {
-  if (!visible) {
+const Modal = () => {
+  const modal = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+
+  const handleHideModal = () => {
+    dispatch(hideModal());
+  };
+
+  if (!modal.visible) {
     return <div id="modal-container"></div>
   } else {
     return (
       <div id="modal-container">
-        <div className="screen"></div>
+        <div onClick={handleHideModal} className="screen"></div>
         <div id="modal">
-        <i className="x-icon icon close-modal"></i>
+        <i onClick={handleHideModal} className="x-icon icon close-modal"></i>
         <header>
             <i className="card-icon icon .close-modal"></i>
             <textarea className="list-title" style={{ height: "45px" }}>

@@ -8,6 +8,9 @@ export default function modal(state = { visible: false }, action) {
 
       return modal;
     }
+    case "HIDE_MODAL": {
+      return { visible: false }
+    }
     default: {
       return state;
     }
