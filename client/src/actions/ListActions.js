@@ -16,3 +16,19 @@ export function createList(title, boardId, callback) {
     });
   };
 }
+
+export function updateListSuccess(list) {
+  return { type: types.UPDATE_LIST_SUCCESS, list}
+}
+
+export function updateList(title, listId, callback) {
+  return function(dispatch) {
+    apiClient.updateList(title, listId, data => {
+      dispatch(updateListSuccess(data));
+
+      if (callback) {
+        callback(data);
+      }
+    });
+  };
+}
