@@ -5,12 +5,14 @@ import { useParams } from "react-router-dom";
 import { fetchBoard } from "../../../actions/BoardActions";
 import MenuSidebar from "./MenuSidebar";
 import ListContainer from "./ListContainer";
+import Modal from "../cardView/Modal";
 
 const Board = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
 
   const board = useSelector((state) => state.boards);
+  const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
     dispatch(fetchBoard(id));
@@ -23,7 +25,7 @@ const Board = () => {
         <ListContainer />
       </main>
       <MenuSidebar />
-      <div id="modal-container"></div>
+      <Modal visible={modal.visible} />
       <div id="dropdown-container"></div>
     </>
   );

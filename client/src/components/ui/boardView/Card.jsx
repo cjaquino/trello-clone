@@ -1,10 +1,18 @@
 import React from "react";
 import CardLabel from "./CardLabel";
+import { useDispatch } from "react-redux";
+import { fetchCard } from "../../../actions/CardActions";
 
 const Card = ({ card }) => {
+  const dispatch = useDispatch();
+
+  const handleFetchCard = () => {
+    dispatch(fetchCard(card._id));
+  };
+
   return (
     <div className="card-background">
-      <div className="card ">
+      <div className="card " onClick={handleFetchCard}>
         <i className="edit-toggle edit-icon sm-icon"></i>
         <div className="card-info">
           {card.labels.map(label => {
@@ -22,6 +30,7 @@ const Card = ({ card }) => {
           <i className="description-icon sm-icon"></i>
           <i className="comment-icon sm-icon"></i>
         </div>
+        {/* {showModal ? <Modal /> : ""} */}
       </div>
     </div>
   );
