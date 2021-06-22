@@ -1,12 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "../../../actions/ModalActions";
 
 const Modal = () => {
   const modal = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleHideModal = () => {
+    history.push(`/boards/${modal.cardInfo.boardId}`);
     dispatch(hideModal());
   };
 

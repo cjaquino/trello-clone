@@ -35,6 +35,7 @@ const Application = () => {
       <Route path="/ui/moveCardPopover" component={MoveCardPopover} />
       <Route path="/ui/singleBoard" component={SingleBoard} />
       <Route path="/boards/:id" component={Board} />
+      <Route path="/cards/:id" component={Board} />
     </div>
   );
 };

@@ -1,13 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import CardLabel from "./CardLabel";
-import { useDispatch } from "react-redux";
-import { fetchCard } from "../../../actions/CardActions";
 
 const Card = ({ card }) => {
-  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleFetchCard = () => {
-    dispatch(fetchCard(card._id));
+    history.push(`/cards/${card._id}`);
   };
 
   return (
