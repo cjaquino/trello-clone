@@ -2,6 +2,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "../../../actions/ModalActions";
+import CardHeader from "./CardHeader";
+import CardMain from "./CardMain";
 
 const Modal = () => {
   const modal = useSelector((state) => state.modal);
@@ -20,21 +22,9 @@ const Modal = () => {
       <div id="modal-container">
         <div onClick={handleHideModal} className="screen"></div>
         <div id="modal">
-        <i onClick={handleHideModal} className="x-icon icon close-modal"></i>
-        <header>
-            <i className="card-icon icon .close-modal"></i>
-            <textarea className="list-title" style={{ height: "45px" }}>
-              Cards do many cool things. Click on this card to open it and learn
-              more...
-            </textarea>
-            <p>
-              in list <a className="link">Stuff to try (this is a list)</a>
-              <i className="sub-icon sm-icon"></i>
-            </p>
-          </header>
-          <section className="modal-main">
-
-          </section>
+          <i onClick={handleHideModal} className="x-icon icon close-modal"></i>
+          <CardHeader />
+          <CardMain />
           <aside className="modal-buttons">
             <h2>Add</h2>
             <ul>
