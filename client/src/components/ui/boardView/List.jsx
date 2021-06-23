@@ -48,9 +48,6 @@ const List = ({ id }) => {
           <AddDropdown pos="top" />
           <CardsContainer listId={id} />
           <AddDropdown pos="bottom" />
-          <div className="add-card-toggle" data-position="bottom">
-            Add a card...
-          </div>
         </div>
       </div>
     </div>

@@ -16,7 +16,8 @@ const AddDropdown = ({
     );
   } else if (pos === "bottom") {
     return (
-      <div className="add-dropdown add-bottom">
+      <>
+      <div className="add-dropdown add-bottom active-card">
         <div className="card">
           <div className="card-info"></div>
           <textarea name="add-card"></textarea>
@@ -28,6 +29,10 @@ const AddDropdown = ({
           <span>...</span>
         </div>
       </div>
+      <div className="add-card-toggle" data-position="bottom">
+        Add a card...
+      </div>
+      </>
     );
   }
 };
