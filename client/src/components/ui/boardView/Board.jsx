@@ -1,20 +1,29 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { fetchBoard } from "../../../actions/BoardActions";
+import { fetchCard } from "../../../actions/CardActions";
 import MenuSidebar from "./MenuSidebar";
 import ListContainer from "./ListContainer";
+import Modal from "../cardView/Modal";
 
 const Board = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
+  let { pathname } = useLocation();
 
   const board = useSelector((state) => state.boards);
 
   useEffect(() => {
-    dispatch(fetchBoard(id));
-  }, [dispatch, id]);
+    if (pathname.includes("cards")) {
+      dispatch(fetchCard(id, (card) => {
+        dispatch(fetchBoard(card.boardId));
+      }));
+    } else {
+      dispatch(fetchBoard(id));
+    }
+  }, [dispatch, id, pathname]);
 
   return (
     <>
@@ -23,7 +32,7 @@ const Board = () => {
         <ListContainer />
       </main>
       <MenuSidebar />
-      <div id="modal-container"></div>
+      <Modal />
       <div id="dropdown-container"></div>
     </>
   );
