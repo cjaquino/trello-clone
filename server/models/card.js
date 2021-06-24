@@ -14,16 +14,17 @@ const CardSchema = new Schema({
   ],
   description: String,
   listId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, "The Card listId is required"],
+    ref: "List",
   },
   boardId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, "The Card boardId is required"],
+    ref: "Board",
   },
   position: {
     type: Number,
-    required: [true, "The Card position is required"],
   },
   commentsCount: Number,
 });
