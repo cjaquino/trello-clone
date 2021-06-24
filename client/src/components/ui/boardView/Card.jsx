@@ -20,7 +20,7 @@ const Card = ({ card }) => {
           <p>{card.title}</p>
         </div>
         <div className="card-icons">
-          {card.dueDate !== null
+          {card.dueDate !== undefined
            ? <i className="clock-icon sm-icon overdue-recent completed">
               {(new Date(card.dueDate)).toDateString().slice(4, 11)}
             </i>

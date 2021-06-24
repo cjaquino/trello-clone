@@ -4,7 +4,10 @@ import { createCard } from "../../../actions/CardActions";
 
 const AddDropdown = ({
   pos,
-  listId
+  listId,
+  isActive,
+  onAddCardOpen,
+  onAddCardClose
 }) => {
   const [cardInput, setCardInput] = useState("");
   const dispatch = useDispatch();
@@ -13,9 +16,22 @@ const AddDropdown = ({
     setCardInput(ev.target.value);
   }
 
+  const handleKeyDown = (ev) => {
+    if (ev.key === "Enter") {
+      handleAddCard()
+    }
+  }
+
   const handleAddCard = () => {
-    dispatch(createCard(cardInput, listId));
-    setCardInput("");
+    if (cardInput !== "") {
+      dispatch(createCard(cardInput, listId));
+      setCardInput("");
+      onAddCardClose();
+    }
+  }
+
+  const handleAddCardOpen = () => {
+    onAddCardOpen(listId);
   }
 
 
@@ -34,19 +50,19 @@ const AddDropdown = ({
   } else if (pos === "bottom") {
     return (
       <>
-      <div className="add-dropdown add-bottom active-card">
+      <div className={`add-dropdown add-bottom ${isActive ? "active-card" : ""}`}>
         <div className="card">
           <div className="card-info"></div>
-          <textarea name="add-card" onChange={updateCard} value={cardInput}></textarea>
+          <textarea name="add-card" onKeyDown={handleKeyDown} onChange={updateCard} value={cardInput}></textarea>
           <div className="members"></div>
         </div>
         <a className="button" onClick={handleAddCard}>Add</a>
-        <i className="x-icon icon"></i>
+        <i className="x-icon icon" onClick={onAddCardClose}></i>
         <div className="add-options">
           <span>...</span>
         </div>
       </div>
-      <div className="add-card-toggle" data-position="bottom">
+      <div className="add-card-toggle" data-position="bottom" onClick={handleAddCardOpen}>
         Add a card...
       </div>
       </>

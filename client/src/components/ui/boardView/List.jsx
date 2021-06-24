@@ -5,9 +5,14 @@ import CardsContainer from "./CardsContainer";
 import { updateList } from "../../../actions/ListActions"
 import useInput from "../../../hooks/useInput";
 
-const List = ({ id, addDropdownClass }) => {
+const List = ({
+  id,
+  isActive,
+  onAddCardOpen,
+  onAddCardClose
+}) => {
   const [titleEditable, setTitleEditable] = useState(false)
-  const list = useSelector((state) => state.boards.lists.find((l) => l._id === id));
+  const list = useSelector((state) => state.lists.find((l) => l._id === id));
   const titleInput = useInput(list.title)
 
   const dispatch = useDispatch();
@@ -27,7 +32,7 @@ const List = ({ id, addDropdownClass }) => {
   }
 
   return (
-    <div className={`list-wrapper ${addDropdownClass}`}>
+    <div className={`list-wrapper ${isActive ? "add-dropdown-active" : ""}`}>
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
@@ -47,7 +52,13 @@ const List = ({ id, addDropdownClass }) => {
           </div>
           <AddDropdown pos="top" />
           <CardsContainer listId={id} />
-          <AddDropdown pos="bottom" listId={id} />
+          <AddDropdown
+            pos="bottom"
+            listId={id}
+            isActive={isActive}
+            onAddCardOpen={onAddCardOpen}
+            onAddCardClose={onAddCardClose}
+          />
         </div>
       </div>
     </div>
