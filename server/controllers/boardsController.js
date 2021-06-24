@@ -1,14 +1,17 @@
 const Board = require("../models/board");
+const List = require("../models/list");
+const Card = require("../models/card");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
 const getBoards = (req, res, next) => {
   Board.find({}, "title _id createdAt updatedAt")
-    .then(boards => {
+    .populate("lists")
+    .then((boards) => {
       res.json({
         boards,
-      })
-    })
+      });
+    });
 };
 
 const createBoard = (req, res, next) => {
@@ -16,9 +19,11 @@ const createBoard = (req, res, next) => {
   if (errors.isEmpty()) {
     Board.create(req.body.board)
       .then((board) => {
-        Board.find({ _id: board._id }, "title _id createdAt updatedAt").then(board => res.json({ board }))
+        Board.find({ _id: board._id }, "title _id createdAt updatedAt").then(
+          (board) => res.json({ board })
+        );
       })
-      .catch(err =>
+      .catch((err) =>
         next(new HttpError("Creating board failed, please try again", 500))
       );
   } else {
@@ -26,5 +31,28 @@ const createBoard = (req, res, next) => {
   }
 };
 
+const getBoard = (req, res, next) => {
+  const id = req.params.id;
+  Board.findById(id)
+    .populate({
+      path: "lists",
+      populate: {
+        path: "cards",
+      },
+    })
+    .then((board) => {
+      res.json(board);
+    })
+    .catch((err) => next(new HttpError("Board doesn't exist", 404)));
+};
+
+const addListToBoard = (req, res, next) => {
+  Board.findByIdAndUpdate(req.body.boardId, { $addToSet: {
+    lists: req.list._id
+  }}).then(() => next())
+}
+
 exports.getBoards = getBoards;
+exports.getBoard = getBoard;
 exports.createBoard = createBoard;
+exports.addListToBoard = addListToBoard;
