@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  client:
+    image: client
+    ports:
+      - 8080:80
+  server:
+    image: server
+    ports:
+      - 5000:5000
+    stdin_open: true
+    tty: true

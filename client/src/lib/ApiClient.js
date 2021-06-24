@@ -1,6 +1,9 @@
 import axios from "axios";
 import * as routes from "../constants/ApiRoutes";
 
+// will need to figure out url stuff with waypoint
+const baseURL = "http://localhost:5000";
+
 function logError(errorResponse) {
   const response = errorResponse.response;
 
@@ -21,28 +24,28 @@ axios.defaults.headers.common["Accept"] = "application/json";
 const apiClient = {
   getBoard: function(id, callback) {
     return axios
-      .get(`${routes.BOARDS_INDEX_URL}/${id}`)
+      .get(`${baseURL}${routes.BOARDS_INDEX_URL}/${id}`)
       .then(unwrapData)
       .then(callback)
       .catch(logError);
   },
   getBoards: function(callback) {
     return axios
-      .get(routes.BOARDS_INDEX_URL)
+      .get(`${baseURL}${routes.BOARDS_INDEX_URL}`)
       .then(unwrapData)
       .then(callback)
       .catch(logError);
   },
   createBoard: function(board, callback) {
     return axios
-      .post(routes.CREATE_BOARD_URL, {board})
+      .post(`${baseURL}${routes.CREATE_BOARD_URL}`, {board})
       .then(unwrapData)
       .then(callback)
       .catch(logError);
   },
   createList: function(title, boardId, callback) {
     return axios
-      .post(routes.CREATE_LIST_URL, {
+      .post(`${baseURL}${routes.CREATE_LIST_URL}`, {
         boardId,
         list: {
           title,
@@ -54,7 +57,7 @@ const apiClient = {
   },
   updateList: function(title, listId, callback) {
     return axios
-      .put(`${routes.UPDATE_LIST_URL}/${listId}`, {
+      .put(`${baseURL}${routes.UPDATE_LIST_URL}/${listId}`, {
         title
       })
       .then(unwrapData)
@@ -63,14 +66,14 @@ const apiClient = {
   },
   getCard: function(cardId, callback) {
     return axios
-    .get(`${routes.GET_CARD_URL}/${cardId}`)
+    .get(`${baseURL}${routes.GET_CARD_URL}/${cardId}`)
     .then(unwrapData)
     .then(callback)
     .catch(logError);
   },
   createCard: function(title, listId, callback) {
     return axios
-    .post(routes.CREATE_CARD_URL, {
+    .post(`${baseURL}${routes.CREATE_CARD_URL}`, {
       listId,
       card: {
         title,
