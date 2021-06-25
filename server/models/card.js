@@ -26,8 +26,21 @@ const CardSchema = new Schema({
   position: {
     type: Number,
   },
-  commentsCount: Number,
-});
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comment"
+  }],
+},
+  {
+    toJSON: { virtuals: true },
+  }
+);
+
+CardSchema
+  .virtual('commentsCount')
+  .get(function () {
+    return this.comments.length;
+  });
 
 const Card = mongoose.model("Card", CardSchema);
 

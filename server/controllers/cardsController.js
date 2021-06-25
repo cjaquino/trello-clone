@@ -5,6 +5,7 @@ const { validationResult } = require("express-validator");
 const getCard = (req, res, next) => {
   const id = req.params.id;
   Card.findById(id)
+    .populate("comments")
     .then((card) => {
       res.json(card);
     })
@@ -36,6 +37,13 @@ const sendCard = (req, res, next) => {
   res.json(req.card)
 }
 
+const addCommentToCard = (req, res, next) => {
+  Card.findByIdAndUpdate(req.body.cardId, { $addToSet: {
+    comments: req.comment._id
+  }}).then(() => next())
+}
+
 exports.getCard = getCard;
 exports.createCard = createCard;
 exports.sendCard = sendCard;
+exports.addCommentToCard = addCommentToCard;
