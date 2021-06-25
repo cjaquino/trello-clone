@@ -30,6 +30,12 @@ const CardSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Comment"
   }],
+  actions: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Action"
+  }],
+  completed: Boolean,
+  archived: Boolean,
 },
   {
     toJSON: { virtuals: true },

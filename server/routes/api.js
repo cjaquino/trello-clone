@@ -4,6 +4,7 @@ const boardsController = require("../controllers/boardsController");
 const listsController = require("../controllers/listsController");
 const cardsController = require("../controllers/cardsController");
 const commentsController = require("../controllers/commentsController");
+const actionsController = require("../controllers/actionsController");
 const { validateBoard } = require("../validators/validators");
 
 router.get("/boards", boardsController.getBoards);
@@ -36,6 +37,16 @@ router.post(
 	commentsController.createComment,
 	cardsController.addCommentToCard,
 	commentsController.sendComment
+);
+
+router.put(
+	"/cards/:id",
+	cardsController.findCard,
+	actionsController.buildActionsFromReq,
+	cardsController.updateCard,
+	actionsController.createActions,
+	cardsController.addActionsToCard,
+	cardsController.sendCard
 );
 
 module.exports = router;
