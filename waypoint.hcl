@@ -36,8 +36,7 @@ app "frontend" {
 app "backend" {
   labels = {
     "service" = "trello-clone-backend",
-    "env" = "dev",
-    "some_new_label" = "this-is-a-test"
+    "env" = "dev"
   }
 
   path = "server/"
